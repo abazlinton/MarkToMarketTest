@@ -1,24 +1,32 @@
 {
-  "name": "m2m",
-  "version": "1.0.0",
-  "description": "",
-  "main": "name_as_id.js",
-  "scripts": {
-    "test-debug": "mocha tests --inspect-brk",
-    "test": "mocha tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abazlinton/MarkToMarket.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abazlinton/MarkToMarket/issues"
-  },
-  "homepage": "https://github.com/abazlinton/MarkToMarket#readme",
+  "name": "m2m-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "md5": "^2.2.1",
-    "mocha": "^6.2.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,7 +1,5 @@
-const mocha = require('mocha')
 const assert = require('assert')
-const transactionsHelper = require('../transactionsHelper')
-const ts = require('../transactions.json')
+const transactionsHelper = require('./transactionsHelper')
 
 describe('transactionsHelper', () => {
 
@@ -23,7 +21,7 @@ describe('transactionsHelper', () => {
     });
 
     it('confirms that source transactions have no acquirer that is also a target', () => {
-      const transactions = require('../transactions.json')
+      const transactions = require('./data/transactions.json')
       assert.strictEqual(transactionsHelper.areAnyAcquirersAlsoTargets(transactions), false)
     })
 
