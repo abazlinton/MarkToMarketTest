@@ -1,0 +1,23 @@
+{
+  "name": "m2m",
+  "version": "1.0.0",
+  "description": "",
+  "main": "name_as_id.js",
+  "scripts": {
+    "test-debug": "mocha tests --inspect-brk",
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abazlinton/MarkToMarket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abazlinton/MarkToMarket/issues"
+  },
+  "homepage": "https://github.com/abazlinton/MarkToMarket#readme",
+  "dependencies": {
+    "mocha": "^6.2.0"
+  }
+}
