@@ -64,11 +64,10 @@ describe('transactionsHelper', () => {
         { acquirer_name: "Ladbrokes", target_name: "Betfair", target_id: "SC123456" },
         { acquirer_name: "Sky Bet", target_name: "Betfair", target_id: "SC123456" }
       ]
-      const companies = transactionsHelper.getSortedCompanies(ts)
+      const companies = transactionsHelper.getSortedCompanies(transactions)
       assert.strictEqual(companies[0].id, 1) // Betfair
       assert.strictEqual(companies[1].id, 2) // LadBrookes
       assert.strictEqual(companies[2].id, 3) // Sky Bet
-      console.log(companies)
     })
 
 
