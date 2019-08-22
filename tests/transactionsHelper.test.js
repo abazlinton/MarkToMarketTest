@@ -1,6 +1,7 @@
 const mocha = require('mocha')
 const assert = require('assert')
 const transactionsHelper = require('../transactionsHelper')
+const ts = require('../transactions.json')
 
 describe('transactionsHelper', () => {
 
@@ -57,6 +58,19 @@ describe('transactionsHelper', () => {
       assert.strictEqual(companies[1].number, 'AB480026') // LadBrookes
       assert.strictEqual(companies[2].number, 'AB095726') // Sky Bet
     })
+
+    it('can get set of companies with fake Ids', () => {
+      const transactions = [
+        { acquirer_name: "Ladbrokes", target_name: "Betfair", target_id: "SC123456" },
+        { acquirer_name: "Sky Bet", target_name: "Betfair", target_id: "SC123456" }
+      ]
+      const companies = transactionsHelper.getSortedCompanies(ts)
+      assert.strictEqual(companies[0].id, 1) // Betfair
+      assert.strictEqual(companies[1].id, 2) // LadBrookes
+      assert.strictEqual(companies[2].id, 3) // Sky Bet
+      console.log(companies)
+    })
+
 
   });
 });

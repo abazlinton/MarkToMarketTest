@@ -40,6 +40,10 @@ module.exports = {
       }
       return nextCompanies
     }, [])
-    return unSortedCompanies.sort((company1, company2) => company2.name < company1.name)
+    const sortedCompanies = unSortedCompanies.sort((company1, company2) => company1.name.localeCompare(company2.name))
+    const companiesWithId = sortedCompanies.map((company, index) => {
+      return {...company, id: index + 1}
+    })
+    return companiesWithId
   }
 }
