@@ -8,24 +8,24 @@ import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap'
 function App() {
   return (
     <div className="App">
-      <Navbar expand="lg" variant="dark" bg="dark" fixed="top">
-        <Navbar.Brand href="#">M2M</Navbar.Brand>
-        <Nav
-          activeKey="/"
-        >
-          <Nav.Item>
-            <Nav.Link href="/">Companies</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Navbar>
-      <Container>
+      <Container className="company-table">
+          <Navbar expand="lg" variant="dark" bg="dark" fixed="top">
+            <Navbar.Brand href="#">M2M</Navbar.Brand>
+            <Nav
+              activeKey="/"
+            >
+              <Nav.Item>
+                <Nav.Link href="/">Companies</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
         <Row>
           <Col
             xs={12}
             sm={12}
-            md={12}
-            lg={12}
-            xl={12}
+            md={11}
+            lg={11}
+            xl={11}
           >
             <CompanyList
               companies={transactionsHelper.getSortedCompanies(transactions)}

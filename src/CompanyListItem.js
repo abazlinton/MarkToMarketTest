@@ -2,10 +2,10 @@ import React, { Fragment } from 'react'
 
 const CompanyListItem = ({ name, number }) => {
 
-  let tdInner = <span>{number}</span>
+  let numberRowContent = <Fragment>{number}</Fragment>
 
   if (!number.includes('AB')){
-    tdInner = <a href={`https://beta.companieshouse.gov.uk/company/${number}`}>{number}</a>
+    numberRowContent = <a href={`https://beta.companieshouse.gov.uk/company/${number}`}>{number}</a>
   }
 
   return (
@@ -13,7 +13,7 @@ const CompanyListItem = ({ name, number }) => {
     <Fragment>
       <tr>
         <td>{name}</td>
-        <td>{tdInner}</td>
+        <td>{numberRowContent}</td>
       </tr>
     </Fragment>
   )
