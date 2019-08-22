@@ -1,6 +1,7 @@
 const mocha = require('mocha')
 const assert = require('assert')
 const areAnyAcquirersAlsoTargets = require('../transactionsHelper').areAnyAcquirersAlsoTargets
+const getCompanyNames = require('../transactionsHelper').getCompanyNames
 
 describe('transactionsHelper', () => {
 
@@ -32,8 +33,8 @@ describe('transactionsHelper', () => {
         { acquirer_name: "Ladbrokes", target_name: "Betfair" },
         { acquirer_name: "Sky Bet", target_name: "Betfair" }
       ]
-      const expectedNames = ['Sky Bet', 'Paddy Power', 'Betfair', 'Ladbrokes'].sort()
-      
+      const expectedNames = ['Sky Bet', 'Paddy Power', 'Betfair', 'Ladbrokes']
+      assert.deepStrictEqual(getCompanyNames(transactions).sort(), expectedNames.sort())
     })
   });
 });
