@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/abazlinton/MarkToMarket#readme",
   "dependencies": {
+    "md5": "^2.2.1",
     "mocha": "^6.2.0"
   }
 }

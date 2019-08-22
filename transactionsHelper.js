@@ -1,4 +1,6 @@
 
+const md5 = require('md5')
+
 module.exports = {
   areAnyAcquirersAlsoTargets(transactions) {
     const acquirerNames = transactions.map(transaction => transaction.acquirer_name)
@@ -15,5 +17,29 @@ module.exports = {
       if (!companyNames.includes(targetName)) nextCompanyNames.push(targetName)
       return nextCompanyNames
     }, [])
+  },
+
+  getUniqueNumberForName(name) {
+    return 'AB' + md5(name).match(/[0-9]/g).slice(0, 6).join('')
+  },
+
+  findNumberForTargetName(companyName, transactions) {
+    const foundTransaction = transactions.find(transaction => transaction.target_name === companyName)
+    return foundTransaction.target_id
+  },
+
+  getSortedCompanies(transactions) {
+    const companyNames = this.getCompanyNames(transactions).sort()
+    const unSortedCompanies = companyNames.reduce((companies, companyName, index) => {
+      const nextCompanies = [...companies]
+      const isAcquirer = transactions.map(transaction => transaction.acquirer_name).includes(companyName)
+      if (isAcquirer) {
+        nextCompanies.push({ name: companyName, number: this.getUniqueNumberForName(companyName) })
+      } else {
+        nextCompanies.push({ name: companyName, number: this.findNumberForTargetName(companyName, transactions) })
+      }
+      return nextCompanies
+    }, [])
+    return unSortedCompanies.sort((company1, company2) => company2.name < company1.name)
   }
 }

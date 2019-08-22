@@ -1,7 +1,6 @@
 const mocha = require('mocha')
 const assert = require('assert')
-const areAnyAcquirersAlsoTargets = require('../transactionsHelper').areAnyAcquirersAlsoTargets
-const getCompanyNames = require('../transactionsHelper').getCompanyNames
+const transactionsHelper = require('../transactionsHelper')
 
 describe('transactionsHelper', () => {
 
@@ -11,22 +10,22 @@ describe('transactionsHelper', () => {
         { acquirer_name: "Sky Bet", target_name: "Paddy Power" },
         { acquirer_name: "Paddy Power", target_name: "Sky Bet" }
       ]
-      assert.strictEqual(areAnyAcquirersAlsoTargets(transactions), true)
+      assert.strictEqual(transactionsHelper.areAnyAcquirersAlsoTargets(transactions), true)
     });
-  
+
     it('can detect when no acquirer is also a target', () => {
       const transactions = [
         { acquirer_name: "Sky Bet", target_name: "Paddy Power" },
         { acquirer_name: "Ladbrokes", target_name: "Betfair" }
       ]
-      assert.strictEqual(areAnyAcquirersAlsoTargets(transactions), false)
+      assert.strictEqual(transactionsHelper.areAnyAcquirersAlsoTargets(transactions), false)
     });
-  
+
     it('confirms that source transactions have no acquirer that is also a target', () => {
       const transactions = require('../transactions.json')
-      assert.strictEqual(areAnyAcquirersAlsoTargets(transactions), false)
+      assert.strictEqual(transactionsHelper.areAnyAcquirersAlsoTargets(transactions), false)
     })
-  
+
     it('can get set of company names', () => {
       const transactions = [
         { acquirer_name: "Sky Bet", target_name: "Paddy Power" },
@@ -34,7 +33,30 @@ describe('transactionsHelper', () => {
         { acquirer_name: "Sky Bet", target_name: "Betfair" }
       ]
       const expectedNames = ['Sky Bet', 'Paddy Power', 'Betfair', 'Ladbrokes']
-      assert.deepStrictEqual(getCompanyNames(transactions).sort(), expectedNames.sort())
+      assert.deepStrictEqual(transactionsHelper.getCompanyNames(transactions).sort(), expectedNames.sort())
     })
+
+    it('can get set of companies names within object', () => {
+      const transactions = [
+        { acquirer_name: "Ladbrokes", target_name: "Betfair" },
+        { acquirer_name: "Sky Bet", target_name: "Betfair" }
+      ]
+      const companies = transactionsHelper.getSortedCompanies(transactions)
+      assert.strictEqual(companies[0].name, 'Betfair')
+      assert.strictEqual(companies[1].name, 'Ladbrokes')
+      assert.strictEqual(companies[2].name, 'Sky Bet')
+    })
+
+    it('can get set of companies numbers', () => {
+      const transactions = [
+        { acquirer_name: "Ladbrokes", target_name: "Betfair", target_id: "SC123456" },
+        { acquirer_name: "Sky Bet", target_name: "Betfair", target_id: "SC123456" }
+      ]
+      const companies = transactionsHelper.getSortedCompanies(transactions)
+      assert.strictEqual(companies[0].number, 'SC123456') // Betfair
+      assert.strictEqual(companies[1].number, 'AB480026') // LadBrookes
+      assert.strictEqual(companies[2].number, 'AB095726') // Sky Bet
+    })
+
   });
 });
