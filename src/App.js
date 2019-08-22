@@ -8,8 +8,7 @@ import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap'
 function App() {
   return (
     <div className="App">
-      <Container className="company-table">
-          <Navbar expand="lg" variant="dark" bg="dark" fixed="top">
+          <Navbar expand="sm" variant="dark" bg="dark" fixed="top">
             <Navbar.Brand href="#">M2M</Navbar.Brand>
             <Nav
               activeKey="/"
@@ -17,8 +16,12 @@ function App() {
               <Nav.Item>
                 <Nav.Link href="/">Companies</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/projects">Projects</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Navbar>
+      <Container className="company-table">
         <Row>
           <Col
             xs={12}
