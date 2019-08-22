@@ -23,13 +23,7 @@ function App() {
           </Navbar>
       <Container className="company-table">
         <Row>
-          <Col
-            xs={12}
-            sm={12}
-            md={11}
-            lg={11}
-            xl={11}
-          >
+          <Col xs={12} sm={12} md={11} lg={11} xl={11}>
             <CompanyList
               companies={transactionsHelper.getSortedCompanies(transactions)}
             />
