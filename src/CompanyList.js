@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import CompanyListItem from './CompanyListItem'
 import './CompanyList.css'
 import Table from 'react-bootstrap/Table';
+import { connect } from 'react-redux'
+import { loadCompanies } from './redux/actions'
 
+const CompanyList = ({ companies, dispatch }) => {
 
-const CompanyList = ({ companies }) => {
+  useEffect(() => {
+    dispatch(loadCompanies())
+  }, [dispatch])
 
   const companyComponents = companies.map((company) => {
     return <CompanyListItem
@@ -13,6 +18,8 @@ const CompanyList = ({ companies }) => {
       key={company.name}
     />
   })
+
+  if (companies.length === 0) return null
 
   return <Table striped bordered hover>
     <thead>
@@ -27,4 +34,10 @@ const CompanyList = ({ companies }) => {
   </Table>
 }
 
-export default CompanyList
+const mapStateToProps = state => ({
+  companies: state.companies
+})
+
+export default connect(
+  mapStateToProps
+)(CompanyList)

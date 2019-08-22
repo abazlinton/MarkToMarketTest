@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import CompanyList from './CompanyList';
-import transactionsHelper from './transactionsHelper'
-import transactions from './data/transactions.json'
 import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap'
 
 function App() {
@@ -24,9 +22,7 @@ function App() {
       <Container className="company-table">
         <Row>
           <Col xs={12} sm={12} md={11} lg={11} xl={11}>
-            <CompanyList
-              companies={transactionsHelper.getSortedCompanies(transactions)}
-            />
+            <CompanyList/>
           </Col>
         </Row>
       </Container>
