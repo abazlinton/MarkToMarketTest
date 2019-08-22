@@ -41,9 +41,7 @@ export default {
       return nextCompanies
     }, [])
     const sortedCompanies = unSortedCompanies.sort((company1, company2) => company1.name.localeCompare(company2.name))
-    const companiesWithId = sortedCompanies.map((company, index) => {
-      return {...company, id: index + 1}
-    })
+    const companiesWithId = sortedCompanies.map((company, index) => ({...company, id: index + 1}))
     return companiesWithId
   }
 }

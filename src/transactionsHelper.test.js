@@ -1,5 +1,5 @@
+import transactionsHelper from './transactionsHelper'
 const assert = require('assert')
-const transactionsHelper = require('./transactionsHelper')
 
 describe('transactionsHelper', () => {
 
