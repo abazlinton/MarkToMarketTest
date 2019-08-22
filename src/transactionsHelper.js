@@ -1,7 +1,7 @@
 
 const md5 = require('md5')
 
-module.exports = {
+export default {
   areAnyAcquirersAlsoTargets(transactions) {
     const acquirerNames = transactions.map(transaction => transaction.acquirer_name)
     const targetNames = transactions.map(transaction => transaction.target_name)
