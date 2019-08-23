@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import CompanyTableRow from './CompanyTableRow'
 import './CompanyTable.css'
-import Table from 'react-bootstrap/Table';
+import { Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { requestCompanies, receiveCompanies } from './redux/actions'
 
@@ -24,17 +24,27 @@ const CompanyTable = ({ companies, dispatch, isFetchingCompanies }) => {
 
   if (isFetchingCompanies) return <h1>Loading...</h1>
 
-  return <Table striped bordered hover>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Company Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      {companyTableRows}
-    </tbody>
-  </Table>
+  return (
+    <Container className="company-table">
+      <Row>
+        <Col xs={12} sm={12} md={11} lg={11} xl={11}>
+
+          <Table striped bordered hover>
+
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Company Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              {companyTableRows}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
+  )
 }
 
 const mapStateToProps = state => ({
