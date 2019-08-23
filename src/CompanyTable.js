@@ -23,7 +23,7 @@ const CompanyTable = ({ companies, dispatch, isFetching }) => {
     />
   })
 
-  if (isFetching) return <h1>Loading...</h1>
+  if (isFetching) return null
 
   return (
     <Container className="company-table">
@@ -50,7 +50,7 @@ const CompanyTable = ({ companies, dispatch, isFetching }) => {
 
 const mapStateToProps = state => ({
   companies: state.companies,
-  isFetchingCompanies: state.isFetchingCompanies
+  isFetching: state.isFetching
 })
 
 export default connect(

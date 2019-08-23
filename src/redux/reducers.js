@@ -2,13 +2,15 @@ import {
   REQUEST_COMPANIES,
   RECEIVE_COMPANIES,
   REQUEST_COMPANY,
-  RECEIVE_COMPANY
+  RECEIVE_COMPANY,
+  CLEAR_COMPANY
 } from './actions'
 
 
 const defaultState = {
   companies: [],
-  isFetching: false
+  isFetching: false,
+  company: {}
 }
 
 export default function m2m(state = defaultState, action) {
@@ -29,6 +31,10 @@ export default function m2m(state = defaultState, action) {
 
     case RECEIVE_COMPANY: {
       return {...state, isFetching: false, company: action.company}
+    }
+
+    case CLEAR_COMPANY: {
+      return {...state, company: {}}
     }
 
     default: {

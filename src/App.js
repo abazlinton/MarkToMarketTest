@@ -9,6 +9,7 @@ import transactionsHelper from './transactionsHelper'
 import transactions from './data/transactions.json'
 import { LinkContainer } from "react-router-bootstrap";
 
+
 fetchMock
   .get('http://api/companies', transactionsHelper.getSortedCompanies(transactions))
   .get('express:/companies/:id', (url) => {
