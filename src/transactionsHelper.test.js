@@ -68,6 +68,28 @@ describe('transactionsHelper', () => {
       assert.strictEqual(companies[2].id, 3) // Sky Bet
     })
 
+    it('can get company by id', () => {
+      const transactions = [
+        { acquirer_name: "Ladbrokes", target_name: "Ladbrokes", target_id: "SC123456"},
+      ]
+      const company = transactionsHelper.getCompanyById(transactions, 1)
+      assert.strictEqual(company.name, "Ladbrokes") 
+    })
+
+    it('can get transactions as acquirer', () => {
+      const transactions = [
+        { acquirer_name: "Ladbrokes", target_name: "Betfair", target_id: "SC123456" },
+        { acquirer_name: "Betfair", target_name: "Ladbrokes", target_id: "AB123456"},
+        { acquirer_name: "Sky Bet", target_name: "Betfair", target_id: "SC123456" },
+        { acquirer_name: "Ladbrokes", target_name: "Paddy Power", target_id: "SC123456" },
+
+      ]
+      const foundTransactions = transactionsHelper.getAcquisitionTransactionsForCompanyWithId(transactions, 2)
+      assert.strictEqual(foundTransactions[0].acquirer_name, "Ladbrokes") 
+      assert.strictEqual(foundTransactions[1].target_name, "Paddy Power") 
+      assert.strictEqual(foundTransactions.length, 2) 
+    })
+
 
   });
 });

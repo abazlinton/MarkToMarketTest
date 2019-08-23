@@ -47,6 +47,28 @@ export default {
   
   getCompanyById(transactions, id){
     return this.getSortedCompanies(transactions).find(company => company.id === Number(id))
+  },
+
+  getAcquisitionTransactionsForCompanyWithId(transactions, id){
+    const acquiringCompany = this.getCompanyById(transactions, id)
+    return transactions.reduce((foundTransactions, transaction) => {
+      if (transaction.acquirer_name === acquiringCompany.name){
+        return foundTransactions.concat(transaction)
+      }
+      return foundTransactions
+    }, [])
+  },
+
+  getTargetTransactionsForCompanyWithId(transactions, id){
+    const targetCompany = this.getCompanyById(transactions, id)
+    return transactions.reduce((foundTransactions, transaction) => {
+      if (transaction.target_name === targetCompany.name){
+        return foundTransactions.concat(transaction)
+      }
+      return foundTransactions
+    }, [])
   }
+
+
 
 }

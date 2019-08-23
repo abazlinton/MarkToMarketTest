@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import './Company.css'
 import { Container, Card, CardDeck } from 'react-bootstrap'
-import { requestCompany, receiveCompany, clearCompany } from './redux/actions'
+import { requestCompany, receiveCompany } from './redux/actions'
 import { connect } from 'react-redux'
+import numeral from 'numeral'
+import transactionsHelper from './transactionsHelper'
+import transactions from './data/transactions.json'
 
 const Company = ({ id, dispatch, company, isFetching }) => {
 
@@ -17,39 +20,55 @@ const Company = ({ id, dispatch, company, isFetching }) => {
   // avoid brief view of previous Company
   if (company.id !== Number(id)) return null
 
+  const linkToCompaniesHouse = !company.number.includes('AB')
+    ? <Card.Link href={`https://beta.companieshouse.gov.uk/company/${company.number}`}>
+      View on Companies House
+      </Card.Link>
+    : null
+
+  const acquistionCards = transactionsHelper.getAcquisitionTransactionsForCompanyWithId(transactions, id)
+    .map(transaction => {
+      // all other fields for key might not be unique
+      return <Card key={transaction.value}> 
+        <Card.Body>
+          <Card.Title>{transaction.target_name}</Card.Title>
+          <Card.Subtitle className="mb-4 text-muted">{transaction.target_id}</Card.Subtitle>
+          <Card.Text style={{}}>
+            {numeral(transaction.value).format('($ 0 a)')}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    })
+
+    const targetCards = transactionsHelper.getTargetTransactionsForCompanyWithId(transactions, id)
+    .map(transaction => {
+      // all other fields for key might not be unique
+      return <Card key={transaction.value}> 
+        <Card.Body>
+          <Card.Title>{transaction.acquirer_name}</Card.Title>
+          <Card.Subtitle className="mb-4 text-muted">{transaction.acquirer_id}</Card.Subtitle>
+          <Card.Text style={{}}>
+            {numeral(transaction.value).format('($ 0 a)')}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    })
+
   return <Container className="company">
     <Card style={{ width: '80vw', marginBottom: '3rem' }}>
       <Card.Body>
-        <Card.Title as="h3">{company.name || ""}</Card.Title>
+        <Card.Title as="h2">{company.name || ""}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{company.number || ""}</Card.Subtitle>
-        <Card.Text>
-          Some details about company here
-        </Card.Text>
-        <Card.Link href={`https://beta.companieshouse.gov.uk/company/${company.number}`}>
-          View on Companies House
-        </Card.Link>
+        {linkToCompaniesHouse}
       </Card.Body>
     </Card>
-
-    <h3 className="related-header">Aquisitions</h3>
+    <h4 className="mb-5">Transactions as acquirer</h4>
+    <CardDeck className="mb-5">
+      {acquistionCards}
+    </CardDeck>
+    <h4 className="mb-5">Transactions as target</h4>
     <CardDeck>
-      <Card>
-        <Card.Body>
-          <Card.Title>{company.name || ""}</Card.Title>
-        <Card.Subtitle style={{color: 'darkgreen'}}>£100</Card.Subtitle>
-
-        </Card.Body>
-      </Card>
-      <Card>
-        <Card.Body>
-          <Card.Title>{company.name || ""}</Card.Title>
-        </Card.Body>
-      </Card>
-      <Card>
-        <Card.Body>
-          <Card.Title>{company.name || ""}</Card.Title>
-        </Card.Body>
-      </Card>
+      {targetCards}
     </CardDeck>
   </Container>
 }
