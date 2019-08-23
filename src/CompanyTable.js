@@ -5,7 +5,7 @@ import { Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { requestCompanies, receiveCompanies } from './redux/actions'
 
-const CompanyTable = ({ companies, dispatch, isFetchingCompanies }) => {
+const CompanyTable = ({ companies, dispatch, isFetching }) => {
 
   useEffect(() => {
     dispatch(requestCompanies())
@@ -16,13 +16,14 @@ const CompanyTable = ({ companies, dispatch, isFetchingCompanies }) => {
 
   const companyTableRows = companies.map((company) => {
     return <CompanyTableRow
+      id={company.id}
       name={company.name}
       number={company.number}
       key={company.name}
     />
   })
 
-  if (isFetchingCompanies) return <h1>Loading...</h1>
+  if (isFetching) return <h1>Loading...</h1>
 
   return (
     <Container className="company-table">
