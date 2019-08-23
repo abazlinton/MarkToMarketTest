@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
-const CompanyListItem = ({ name, number }) => {
-
+const CompanyTableRow = ({ name, number }) => {
+  
   let numberRowContent = <Fragment>{number}</Fragment>
 
   if (!number.includes('AB')){
@@ -9,14 +9,11 @@ const CompanyListItem = ({ name, number }) => {
   }
 
   return (
-
-    <Fragment>
       <tr>
         <td>{name}</td>
         <td>{numberRowContent}</td>
       </tr>
-    </Fragment>
   )
 }
 
-export default CompanyListItem
+export default CompanyTableRow

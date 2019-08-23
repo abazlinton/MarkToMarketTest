@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
-import CompanyList from './CompanyList';
+import CompanyTable from './CompanyTable';
 import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap'
+import fetchMock from 'fetch-mock'
+import transactionsHelper from './transactionsHelper'
+import transactions from './data/transactions.json'
+
+fetchMock.mock('http://api/companies', transactionsHelper.getSortedCompanies(transactions));
 
 function App() {
   return (
@@ -22,7 +27,7 @@ function App() {
       <Container className="company-table">
         <Row>
           <Col xs={12} sm={12} md={11} lg={11} xl={11}>
-            <CompanyList/>
+            <CompanyTable/>
           </Col>
         </Row>
       </Container>
