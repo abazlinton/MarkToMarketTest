@@ -4,18 +4,10 @@ import CompanyTable from './CompanyTable';
 import Company from './Company';
 import { Navbar, Nav } from 'react-bootstrap'
 import { Route, Switch } from "react-router-dom";
-import fetchMock from 'fetch-mock'
-import transactionsHelper from './transactionsHelper'
-import transactions from './data/transactions.json'
 import { LinkContainer } from "react-router-bootstrap";
+import mockFetches from './mockFetches'
 
-
-fetchMock
-  .get('http://api/companies', transactionsHelper.getSortedCompanies(transactions))
-  .get('express:/companies/:id', (url) => {
-    const id = url.match(/\d+/)[0] 
-    return transactionsHelper.getCompanyById(transactions, id)
-  })
+mockFetches()
 
 function App() {
   return (

@@ -3,14 +3,21 @@ import {
   RECEIVE_COMPANIES,
   REQUEST_COMPANY,
   RECEIVE_COMPANY,
-  CLEAR_COMPANY
+  CLEAR_COMPANY,
+  REQUEST_COMPANY_ACQUISTIONS,
+  RECEIVE_COMPANY_ACQUISTIONS,
+  REQUEST_COMPANY_TARGETS,
+  RECEIVE_COMPANY_TARGETS
 } from './actions'
 
 
 const defaultState = {
   companies: [],
   isFetching: false,
-  company: {}
+  company: { 
+    acquistions: [],
+    targets: []
+  }
 }
 
 export default function m2m(state = defaultState, action) {
@@ -30,7 +37,26 @@ export default function m2m(state = defaultState, action) {
     }
 
     case RECEIVE_COMPANY: {
-      return {...state, isFetching: false, company: action.company}
+      const company = {...state.company, ...action.company }
+      return {...state, isFetching: false, company}
+    }
+
+    case REQUEST_COMPANY_ACQUISTIONS: {
+      return {...state, isFetching: true}
+    }
+
+    case RECEIVE_COMPANY_ACQUISTIONS: {
+      const company = {...state.company, acquistions: action.acquistions}
+      return {...state, isFetching: false, company }
+    }
+
+    case REQUEST_COMPANY_TARGETS: {
+      return {...state, isFetching: true}
+    }
+
+    case RECEIVE_COMPANY_TARGETS: {
+      const company = {...state.company, targets: action.targets}
+      return {...state, isFetching: false, company }
     }
 
     case CLEAR_COMPANY: {
