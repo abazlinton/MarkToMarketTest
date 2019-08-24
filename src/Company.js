@@ -11,8 +11,6 @@ import {
 } from './redux/actions'
 import { connect } from 'react-redux'
 import numeral from 'numeral'
-import transactionsHelper from './transactionsHelper'
-import transactions from './data/transactions.json'
 
 const Company = ({ id, dispatch, company, isFetching }) => {
 
