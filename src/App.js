@@ -7,6 +7,9 @@ import { Route, Switch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import mockFetches from './mockFetches'
 import NewProject from './NewProject'
+import Projects from './Projects';
+import Project from './Project';
+
 
 mockFetches()
 
@@ -45,6 +48,13 @@ function App() {
           }}
         />
         <Route path="/projects/new" component={NewProject} />
+        <Route path="/projects/" component={Projects} />
+        <Route
+          path="/projects/:id"
+          render={({ match }) => {
+            return <Project id={match.params.id} />
+          }}
+        />
       </Switch>
     </div>
   );

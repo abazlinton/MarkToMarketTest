@@ -7,6 +7,8 @@ export const RECEIVE_COMPANY_ACQUISTIONS = 'RECEIVE_COMPANY_ACQUISTIONS'
 export const REQUEST_COMPANY_TARGETS = 'REQUEST_COMPANY_TARGETS'
 export const RECEIVE_COMPANY_TARGETS = 'RECEIVE_COMPANY_TARGETS'
 export const CLEAR_COMPANY = 'CLEAR_COMPANY'
+export const ADD_PROJECT = 'ADD_PROJECT'
+
 
 export const requestCompanies = () => ({
   type: REQUEST_COMPANIES
@@ -49,4 +51,9 @@ export const receiveCompanyTargets = (targets) => ({
 
 export const clearCompany = () => ({
   type: CLEAR_COMPANY
+})
+
+export const addProject = (project) => ({
+  type: ADD_PROJECT,
+  project
 })

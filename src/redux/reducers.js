@@ -7,7 +7,8 @@ import {
   REQUEST_COMPANY_ACQUISTIONS,
   RECEIVE_COMPANY_ACQUISTIONS,
   REQUEST_COMPANY_TARGETS,
-  RECEIVE_COMPANY_TARGETS
+  RECEIVE_COMPANY_TARGETS,
+  ADD_PROJECT
 } from './actions'
 
 
@@ -17,7 +18,8 @@ const defaultState = {
   company: { 
     acquistions: [],
     targets: []
-  }
+  },
+  projects: []
 }
 
 export default function m2m(state = defaultState, action) {
@@ -61,6 +63,12 @@ export default function m2m(state = defaultState, action) {
 
     case CLEAR_COMPANY: {
       return {...state, company: {}}
+    }
+
+    case ADD_PROJECT: {
+      const newProject = {...action.project, id: state.projects.length + 1}
+      const projects = [...state.projects, newProject]
+      return {...state, projects }
     }
 
     default: {
