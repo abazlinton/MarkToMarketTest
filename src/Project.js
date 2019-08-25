@@ -2,8 +2,9 @@ import React, { useEffect, Fragment } from 'react'
 import TransactionTable from "./TransactionTable";
 import { requestProject, receiveProject } from './redux/actions'
 import { connect } from 'react-redux';
+import { Container } from 'react-bootstrap'
 
-const Project = ({ dispatch, id }) => {
+const Project = ({ dispatch, id, project }) => {
 
   useEffect(() => {
     dispatch(requestProject())
@@ -14,14 +15,15 @@ const Project = ({ dispatch, id }) => {
 
 
   return (
-    <Fragment>
-      
+    <Container className="project">
+      <p>{JSON.stringify(project)}</p>
       <TransactionTable />
-    </Fragment>
+    </Container>
   )
 }
 
 const mapStateToProps = (state) => ({
+  project: state.project
 })
 
 export default connect(

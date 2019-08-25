@@ -9,11 +9,10 @@ import mockFetches from './mockFetches'
 import NewProject from './NewProject'
 import Projects from './Projects';
 import Project from './Project';
+import {connect} from 'react-redux'
 
 
-function App({ store }) {
-
-  mockFetches(store)
+const App = function({ dispatch }) {
 
   return (
     <div className="App">
@@ -53,7 +52,6 @@ function App({ store }) {
         <Route
           path="/projects/:id"
           render={({ match }) => {
-            debugger
             return <Project id={match.params.id} />
           }}
         />
@@ -62,4 +60,6 @@ function App({ store }) {
   );
 }
 
-export default App;
+
+
+export default App
