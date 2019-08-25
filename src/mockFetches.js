@@ -31,7 +31,7 @@ function mockFetches(store) {
 // Yuck
 const encloseStore = (store) => (url) => {
   const id = url.match(/\d+/)[0]
-  return store.getState().projects.find(project => project.id === Number(id))
+  return store.getState().projects.find(project => Number(project.id) === Number(id))
 }
 
 

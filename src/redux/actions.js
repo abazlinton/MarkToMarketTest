@@ -12,6 +12,8 @@ export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS'
 export const REQUEST_PROJECT = 'REQUEST_PROJECT'
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
+export const ADDED_PROJECT = 'ADDED_PROJECT'
+
 
 
 export const requestCompanies = () => ({
@@ -80,3 +82,8 @@ export const addProject = (project) => ({
   type: ADD_PROJECT,
   project
 })
+
+export const addedProject = (project) => ({
+  type: ADDED_PROJECT
+})
+

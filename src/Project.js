@@ -4,7 +4,9 @@ import { requestProject, receiveProject } from './redux/actions'
 import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap'
 
-const Project = ({ dispatch, id, project }) => {
+const Project = ({ dispatch, id, project, isFetching }) => {
+
+  console.log('render project')
 
   useEffect(() => {
     dispatch(requestProject())
@@ -23,7 +25,8 @@ const Project = ({ dispatch, id, project }) => {
 }
 
 const mapStateToProps = (state) => ({
-  project: state.project
+  project: state.project,
+  isFetching: state.isFetching
 })
 
 export default connect(

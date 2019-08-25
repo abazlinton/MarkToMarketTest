@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Form, Button, Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { addProject } from './redux/actions'
+import { addProject, addedProject } from './redux/actions'
 import './NewProject.css'
 
-const NewProject = ({ id, dispatch }) => {
+const NewProject = ({ lastAddedProjectId, dispatch, shouldRedirect }) => {
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
-  const [isSubmitted, setIsSubmitted] = useState(false)
 
   function handleNameChange(event) {
     setName(event.target.value)
@@ -21,12 +20,14 @@ const NewProject = ({ id, dispatch }) => {
 
   function handleFormSubmit(event) {
     event.preventDefault()
-    setIsSubmitted(true)
     const project = { name, description }
     dispatch(addProject(project))
   }
 
-  if (isSubmitted) return <Redirect to={`/projects/${id}`} />
+  if (shouldRedirect) {
+    dispatch(addedProject())
+    return <Redirect to={`/projects/${lastAddedProjectId}`} />
+  } 
 
   return (
     <Container className="new-project">
@@ -61,11 +62,10 @@ const NewProject = ({ id, dispatch }) => {
 }
 
 const mapStateToProps = (state) => {
-  const numberOfProjects = state.projects.length
-  if (numberOfProjects === 0) {
-    return { id: null }
+  return { 
+    shouldRedirect: state.shouldRedirect,
+    lastAddedProjectId: state.lastAddedProjectId
   }
-  return { id: state.projects[state.projects.length - 1].id }
 }
 
 export default connect(

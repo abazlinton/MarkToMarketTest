@@ -12,7 +12,8 @@ import {
   RECEIVE_TRANSACTIONS,
   REQUEST_PROJECT,
   RECEIVE_PROJECT,
-  ADD_PROJECT
+  ADD_PROJECT,
+  ADDED_PROJECT
 } from './actions'
 
 
@@ -24,10 +25,9 @@ const defaultState = {
     acquistions: [],
     targets: []
   },
-  projects: [{id: 0}],
-  project: {
-    transactions: []
-  }
+  projects: [],
+  lastAddedProjectId: 0,
+  shouldRedirect: false
 }
 
 export default function m2m(state = defaultState, action) {
@@ -82,9 +82,14 @@ export default function m2m(state = defaultState, action) {
     }
 
     case ADD_PROJECT: {
-      const newProject = {...action.project, id: state.projects.length + 1}
+      const nextId = state.lastAddedProjectId + 1
+      const newProject = {...action.project, id: nextId }
       const projects = [...state.projects, newProject]
-      return {...state, projects }
+      return {...state, projects, lastAddedProjectId: nextId, shouldRedirect: true }
+    }
+
+    case ADDED_PROJECT: {
+      return {...state, shouldRedirect: false}
     }
 
     case REQUEST_PROJECT: {
@@ -92,7 +97,7 @@ export default function m2m(state = defaultState, action) {
     }
 
     case RECEIVE_PROJECT: {
-      return { ...state, project: action.project }
+      return { ...state, project: action.project, isFetching: false }
     }
 
     default: {
