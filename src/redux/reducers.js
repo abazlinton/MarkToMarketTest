@@ -8,6 +8,10 @@ import {
   RECEIVE_COMPANY_ACQUISTIONS,
   REQUEST_COMPANY_TARGETS,
   RECEIVE_COMPANY_TARGETS,
+  REQUEST_TRANSACTIONS,
+  RECEIVE_TRANSACTIONS,
+  REQUEST_PROJECT,
+  RECEIVE_PROJECT,
   ADD_PROJECT
 } from './actions'
 
@@ -15,11 +19,15 @@ import {
 const defaultState = {
   companies: [],
   isFetching: false,
+  transactions: [],
   company: { 
     acquistions: [],
     targets: []
   },
-  projects: []
+  projects: [{id: 0}],
+  project: {
+    transactions: []
+  }
 }
 
 export default function m2m(state = defaultState, action) {
@@ -65,10 +73,26 @@ export default function m2m(state = defaultState, action) {
       return {...state, company: {}}
     }
 
+    case REQUEST_TRANSACTIONS: {
+      return {...state, isFetching: true}
+    }
+
+    case RECEIVE_TRANSACTIONS: {
+      return {...state, isFetching: false, transactions: action.transactions}
+    }
+
     case ADD_PROJECT: {
       const newProject = {...action.project, id: state.projects.length + 1}
       const projects = [...state.projects, newProject]
       return {...state, projects }
+    }
+
+    case REQUEST_PROJECT: {
+      return {...state, isFetching: true}
+    }
+
+    case RECEIVE_PROJECT: {
+      return { ...state, project: action.project }
     }
 
     default: {

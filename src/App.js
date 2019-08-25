@@ -11,9 +11,10 @@ import Projects from './Projects';
 import Project from './Project';
 
 
-mockFetches()
+function App({ store }) {
 
-function App() {
+  mockFetches(store)
+
   return (
     <div className="App">
       <Navbar expand="sm" variant="dark" bg="custom-black" fixed="top">
@@ -48,10 +49,11 @@ function App() {
           }}
         />
         <Route path="/projects/new" component={NewProject} />
-        <Route path="/projects/" component={Projects} />
+        <Route exact path="/projects/" component={Projects} />
         <Route
           path="/projects/:id"
           render={({ match }) => {
+            debugger
             return <Project id={match.params.id} />
           }}
         />

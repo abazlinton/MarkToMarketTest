@@ -2,7 +2,7 @@ import fetchMock from 'fetch-mock'
 import transactionsHelper from './transactionsHelper'
 import transactions from './data/transactions.json'
 
-export default () => {
+export default (store) => {
   fetchMock
     .get('http://api/companies', transactionsHelper.getSortedCompanies(transactions))
     .get('express:/companies/:id', (url) => {
@@ -25,4 +25,8 @@ export default () => {
     .get('http://api/transactions',
       () => transactions.map((transaction, index) => ({ ...transaction, id: index + 1 }))
     )
+    .get('express:/projects/:id', (url) => {
+      const id = url.match(/\d+/)[0]
+      debugger
+    })
 }
