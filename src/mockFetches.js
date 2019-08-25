@@ -13,7 +13,7 @@ export default () => {
       const id = url.match(/\d+/)[0]
       return transactionsHelper.getAcquisitionTransactionsForCompanyWithId(transactions, id)
     }, {
-      query: { "isAcquirer": "true" }
+        query: { "isAcquirer": "true" }
       })
     .get('express:/companies/:id/transactions', (url) => {
       const id = url.match(/\d+/)[0]
@@ -22,4 +22,7 @@ export default () => {
         query: { "isAcquirer": "false" },
         overwriteRoutes: false
       })
+    .get('http://api/transactions',
+      () => transactions.map((transaction, index) => ({ ...transaction, id: index + 1 }))
+    )
 }

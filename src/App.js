@@ -6,6 +6,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { Route, Switch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import mockFetches from './mockFetches'
+import NewProject from './NewProject'
 
 mockFetches()
 
@@ -13,24 +14,28 @@ function App() {
   return (
     <div className="App">
       <Navbar expand="sm" variant="dark" bg="dark" fixed="top">
-        <LinkContainer to="/">
-          <Navbar.Brand href="/">
-            M2M
-          </Navbar.Brand>
-        </LinkContainer>
         <Nav
-          activeKey="/"
+          activeKey="index"
         >
-          <LinkContainer to="/companies">
-            <Nav.Item>
-              <Nav.Link href="/companies">Companies</Nav.Link>
-            </Nav.Item>
-          </LinkContainer>
-          <LinkContainer to="/projects">
-            <Nav.Item>
-              <Nav.Link href="/projects">Projects</Nav.Link>
-            </Nav.Item>
-          </LinkContainer>
+          <Navbar.Brand href="/" className="bg-primary text-white px-3">
+            M2M
+            </Navbar.Brand>
+          <Nav.Item>
+            <LinkContainer to="/companies" exact={true} eventKey="companies-index">
+
+              <Nav.Link>Companies</Nav.Link>
+            </LinkContainer>
+          </Nav.Item>
+          <Nav.Item>
+            <LinkContainer to="/projects" exact={true} eventKey="projects-index">
+              <Nav.Link>Projects</Nav.Link>
+            </LinkContainer>
+          </Nav.Item>
+          <Nav.Item>
+            <LinkContainer to="/projects/new" exact={true} eventKey="projects-new">
+              <Nav.Link>New Project</Nav.Link>
+            </LinkContainer>
+          </Nav.Item>
         </Nav>
       </Navbar>
       <Switch>
@@ -41,6 +46,7 @@ function App() {
             return <Company id={match.params.id} />
           }}
         />
+        <Route path="/projects/new" component={NewProject} />
       </Switch>
     </div>
   );
