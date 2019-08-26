@@ -8,7 +8,7 @@ const TransactionTableRow = ({ acquirer_name, target_name, value, id }) => {
     <tr>
       <td>{acquirer_name}</td>
       <td>{target_name}</td>
-      <td>{numeral(value).format('($0.00a)')}</td>
+      <td align="right">{numeral(value).format('(0.0a)')}</td>
     </tr>
   )
 }

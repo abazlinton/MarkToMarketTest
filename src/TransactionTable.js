@@ -37,7 +37,7 @@ const TransactionTable = ({ transactions, dispatch, isFetching }) => {
               <tr>
                 <th>Acquirer Name</th>
                 <th>Target Name</th>
-                <th>Value</th>
+                <th>Value (£)</th>
               </tr>
             </thead>
             <tbody>
