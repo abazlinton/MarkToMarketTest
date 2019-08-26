@@ -47,7 +47,7 @@ const Company = ({ id, dispatch, company, isFetching }) => {
           <Card.Title>{transaction.target_name}</Card.Title>
           <Card.Subtitle className="mb-4 text-muted">{transaction.target_id}</Card.Subtitle>
           <Card.Text style={{}}>
-            {numeral(transaction.value).format('($ 0 a)')}
+            {numeral(transaction.value).format('($0a)')}
           </Card.Text>
         </Card.Body>
       </Card>
@@ -61,7 +61,7 @@ const Company = ({ id, dispatch, company, isFetching }) => {
           <Card.Title>{transaction.acquirer_name}</Card.Title>
           <Card.Subtitle className="mb-4 text-muted">{transaction.acquirer_id}</Card.Subtitle>
           <Card.Text style={{}}>
-            {numeral(transaction.value).format('($ 0 a)')}
+            {numeral(transaction.value).format('($0a)')}
           </Card.Text>
         </Card.Body>
       </Card>

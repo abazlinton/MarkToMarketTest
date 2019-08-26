@@ -46,11 +46,19 @@ const App = function() {
           }}
         />
         <Route exxact path="/projects/new" component={NewProject} />
-        <Route exact path="/projects" component={Projects} />
+        <Route 
+          exact path="/projects" 
+          render={({history}) => {
+            return <Projects 
+              history={history}
+            />
+          }} />
         <Route
           exact path="/projects/:id"
           render={({ match }) => {
-            return <Project id={match.params.id} />
+            return <Project 
+              id={match.params.id} 
+            />
           }}
         />
       </Switch>

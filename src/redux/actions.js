@@ -9,12 +9,12 @@ export const RECEIVE_COMPANY_TARGETS = 'RECEIVE_COMPANY_TARGETS'
 export const CLEAR_COMPANY = 'CLEAR_COMPANY'
 export const REQUEST_TRANSACTIONS = 'REQUEST_COMPANIES'
 export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS'
+export const REQUEST_PROJECTS = 'REQUEST_PROJECTS'
+export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const REQUEST_PROJECT = 'REQUEST_PROJECT'
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const ADDED_PROJECT = 'ADDED_PROJECT'
-
-
 
 export const requestCompanies = () => ({
   type: REQUEST_COMPANIES
@@ -78,12 +78,21 @@ export const receiveProject = (project) => ({
   project
 })
 
+export const requestProjects = () => ({
+  type: REQUEST_PROJECTS
+})
+
+export const receiveProjects = (projects) => ({
+  type: RECEIVE_PROJECTS,
+  projects
+})
+
 export const addProject = (project) => ({
   type: ADD_PROJECT,
   project
 })
 
-export const addedProject = (project) => ({
+export const addedProject = () => ({
   type: ADDED_PROJECT
 })
 

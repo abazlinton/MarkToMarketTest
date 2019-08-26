@@ -25,15 +25,20 @@ function mockFetches(store) {
     .get('http://api/transactions',
       () => transactions.map((transaction, index) => ({ ...transaction, id: index + 1 }))
     )
-    .get('express:/projects/:id', encloseStore(store))
+    .get('http://api/projects', encloseStoreProjects(store))
+    .get('express:/projects/:id', encloseStoreProject(store))
 }
 
 // Yuck
-const encloseStore = (store) => (url) => {
+const encloseStoreProject = (store) => (url) => {
   const id = url.match(/\d+/)[0]
   const foundProject = store.getState().projects.find(project => Number(project.id) === Number(id))
   if (!foundProject) return 404
   return foundProject
+}
+
+const encloseStoreProjects = (store) => () => {
+  return store.getState().projects
 }
 
 
