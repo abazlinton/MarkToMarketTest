@@ -2,15 +2,17 @@ import React from 'react'
 import numeral from 'numeral'
 import { Button, Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
+import { connect } from 'react-redux';
 
 
-const TransactionTableRow = ({ acquirer_name, target_name, value, id }) => {
+const TransactionTableRow = ({ acquirer_name, target_name, value, id, projectId, dispatch }) => {
 
   const [transactionIdToAddToProject, setTransactionIdToAddToProject] = useState(0)
 
   useEffect(() => {
+    // TODO: do this higher?
     if (transactionIdToAddToProject) {
-      fetch(`http://api/projects/${id}/transactions`, {
+      fetch(`http://api/projects/${projectId}/transactions`, {
         method: 'post',
         body: {transaction_id: transactionIdToAddToProject}
       })
@@ -32,7 +34,7 @@ const TransactionTableRow = ({ acquirer_name, target_name, value, id }) => {
       <td align="center">
         <Form
           onSubmit={onFormSubmit}
-          action={`http://api/projects/${id}/transactions`}
+          action={`http://api/projects/${projectId}/transactions`}
           method="post"
         >
           <input id="transaction_id" value={id} type="hidden"/>
@@ -45,4 +47,10 @@ const TransactionTableRow = ({ acquirer_name, target_name, value, id }) => {
   )
 }
 
-export default TransactionTableRow
+const mapStateToProps = (state) => ({
+  projectId: state.project.id
+})
+
+export default connect(
+  mapStateToProps
+ )(TransactionTableRow)

@@ -122,12 +122,20 @@ export default function m2m(state = defaultState, action) {
     }
 
     case ADD_TRANSACTION_TO_PROJECT: { 
+      debugger
+
       const foundProject = state.projects.find(project => Number(project.id) === Number(action.projectId))
+      const foundProjectIndex = state.projects.findIndex(project => Number(project.id) === Number(action.projectId))
       const cloneOfProject = { ...foundProject }
       const cloneOfProjectTransactions = [...cloneOfProject.transactions]
       cloneOfProjectTransactions.push(Number(action.transactionId))
       const nextProject = {...cloneOfProject, transactions: cloneOfProjectTransactions}
-      return {...state, project: nextProject}
+      const nextProjects = [
+        ...state.projects.slice(0, foundProjectIndex), 
+        nextProject,  
+        ...state.projects.slice(foundProjectIndex + 1, state.projects.length)
+      ]
+      return {...state, project: nextProject, projects: nextProjects}
     }
 
     default: {
