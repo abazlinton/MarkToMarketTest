@@ -5,14 +5,12 @@ import Company from './Company';
 import { Navbar, Nav } from 'react-bootstrap'
 import { Route, Switch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import mockFetches from './mockFetches'
 import NewProject from './NewProject'
 import Projects from './Projects';
 import Project from './Project';
-import {connect} from 'react-redux'
 
 
-const App = function({ dispatch }) {
+const App = function() {
 
   return (
     <div className="App">
@@ -47,10 +45,10 @@ const App = function({ dispatch }) {
             return <Company id={match.params.id} />
           }}
         />
-        <Route path="/projects/new" component={NewProject} />
-        <Route exact path="/projects/" component={Projects} />
+        <Route exxact path="/projects/new" component={NewProject} />
+        <Route exact path="/projects" component={Projects} />
         <Route
-          path="/projects/:id"
+          exact path="/projects/:id"
           render={({ match }) => {
             return <Project id={match.params.id} />
           }}

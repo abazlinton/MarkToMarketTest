@@ -26,6 +26,7 @@ const defaultState = {
     targets: []
   },
   projects: [],
+  project: {},
   lastAddedProjectId: 0,
   shouldRedirect: false
 }
