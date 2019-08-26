@@ -18,10 +18,11 @@ const App = function() {
         <Nav
           activeKey="index"
         >
-          <Navbar.Brand href="/" className="brand text-white px-3">M2M</Navbar.Brand>
+          <LinkContainer to="/" exact={true}>
+            <Navbar.Brand className="brand text-white px-3">M2M</Navbar.Brand>
+          </LinkContainer>
           <Nav.Item>
             <LinkContainer to="/companies" exact={true} eventKey="companies-index">
-
               <Nav.Link>COMPANIES</Nav.Link>
             </LinkContainer>
           </Nav.Item>
