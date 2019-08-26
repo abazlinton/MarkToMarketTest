@@ -1,7 +1,6 @@
 import React from "react"
 
 const ProjectTableRow = ({ id, name, description, history }) => {
-
   function redirectToShow(event) {
     event.preventDefault()
     history.push(`/projects/${id}`)

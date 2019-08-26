@@ -15,92 +15,98 @@ import {
   ADD_PROJECT,
   ADDED_PROJECT,
   REQUEST_PROJECTS,
-  RECEIVE_PROJECTS
-} from './actions'
-
+  RECEIVE_PROJECTS,
+  ADD_TRANSACTION_TO_PROJECT
+} from "./actions"
 
 const defaultState = {
   companies: [],
   isFetching: false,
   transactions: [],
-  company: { 
+  company: {
     acquistions: [],
     targets: []
   },
-  projects: [{
-    id: 1,
-    name: "Test Project",
-    description: "Description for test project"
-  }],
+  projects: [
+    {
+      id: 1,
+      name: "Test Project",
+      description: "Description for test project",
+      transactions: []
+    }
+  ],
   project: {},
   lastAddedProjectId: 1,
   shouldRedirect: false
 }
 
 export default function m2m(state = defaultState, action) {
-  
   switch (action.type) {
-
     case REQUEST_COMPANIES: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_COMPANIES: {
-      return {...state, isFetching: false, companies: action.companies}
+      return { ...state, isFetching: false, companies: action.companies }
     }
 
     case REQUEST_COMPANY: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_COMPANY: {
-      const company = {...state.company, ...action.company }
-      return {...state, isFetching: false, company}
+      const company = { ...state.company, ...action.company }
+      return { ...state, isFetching: false, company }
     }
 
     case REQUEST_COMPANY_ACQUISTIONS: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_COMPANY_ACQUISTIONS: {
-      const company = {...state.company, acquistions: action.acquistions}
-      return {...state, isFetching: false, company }
+      const company = { ...state.company, acquistions: action.acquistions }
+      return { ...state, isFetching: false, company }
     }
 
     case REQUEST_COMPANY_TARGETS: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_COMPANY_TARGETS: {
-      const company = {...state.company, targets: action.targets}
-      return {...state, isFetching: false, company }
+      const company = { ...state.company, targets: action.targets }
+      return { ...state, isFetching: false, company }
     }
 
     case CLEAR_COMPANY: {
-      return {...state, company: {}}
+      return { ...state, company: {} }
     }
 
     case REQUEST_TRANSACTIONS: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_TRANSACTIONS: {
-      return {...state, isFetching: false, transactions: action.transactions}
+      return { ...state, isFetching: false, transactions: action.transactions }
     }
 
     case ADD_PROJECT: {
       const nextId = state.lastAddedProjectId + 1
-      const newProject = {...action.project, id: nextId }
+      const newProject = { ...action.project, id: nextId, transactions: [] }
       const projects = [...state.projects, newProject]
-      return {...state, projects, lastAddedProjectId: nextId, shouldRedirect: true }
+      return {
+        ...state,
+        projects,
+        lastAddedProjectId: nextId,
+        shouldRedirect: true
+      }
     }
 
     case ADDED_PROJECT: {
-      return {...state, shouldRedirect: false}
+      return { ...state, shouldRedirect: false }
     }
 
     case REQUEST_PROJECT: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_PROJECT: {
@@ -108,17 +114,24 @@ export default function m2m(state = defaultState, action) {
     }
 
     case REQUEST_PROJECTS: {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
 
     case RECEIVE_PROJECTS: {
       return { ...state, projects: action.projects, isFetching: false }
     }
 
+    case ADD_TRANSACTION_TO_PROJECT: { 
+      const foundProject = state.projects.find(project => Number(project.id) === Number(action.projectId))
+      const cloneOfProject = { ...foundProject }
+      const cloneOfProjectTransactions = [...cloneOfProject.transactions]
+      cloneOfProjectTransactions.push(Number(action.transactionId))
+      const nextProject = {...cloneOfProject, transactions: cloneOfProjectTransactions}
+      return {...state, project: nextProject}
+    }
+
     default: {
       return state
     }
-
   }
-
 }

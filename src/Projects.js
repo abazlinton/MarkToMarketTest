@@ -7,8 +7,6 @@ import ProjectTableRow from "./ProjectTableRow"
 
 const Projects = ({ projects, dispatch, history }) => {
 
-  const [redirectionId, setRedirectionId] = useState(null)
-
   useEffect(() => {
     dispatch(requestProjects())
     fetch("http://api/projects")

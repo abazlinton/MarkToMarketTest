@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock'
 import transactionsHelper from './transactionsHelper'
 import transactions from './data/transactions.json'
+import { addTransactionToProject } from './redux/actions'
 
 function mockFetches(store) {
   fetchMock
@@ -27,6 +28,7 @@ function mockFetches(store) {
     )
     .get('http://api/projects', encloseStoreProjects(store))
     .get('express:/projects/:id', encloseStoreProject(store))
+    .post('express:/projects/:id/transactions', encloseStorePostProject(store))
 }
 
 // Yuck
@@ -39,6 +41,14 @@ const encloseStoreProject = (store) => (url) => {
 
 const encloseStoreProjects = (store) => () => {
   return store.getState().projects
+}
+
+const encloseStorePostProject = (store) => (url, opts) => {
+  const projectId = url.match(/\d+/)[0]
+  const transactionId = opts.body.transaction_id
+  // elsewhere doing this in Component :S
+  store.dispatch(addTransactionToProject(transactionId, projectId))
+  return 200
 }
 
 

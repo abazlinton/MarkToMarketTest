@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { requestTransactions, receiveTransactions } from './redux/actions'
 import TransactionTableRow from './TransactionTableRow';
 
-const TransactionTable = ({ transactions, dispatch, isFetching }) => {
+const TransactionTable = ({ transactions, dispatch, isFetching, filter }) => {
 
   useEffect(() => {
     dispatch(requestTransactions())
@@ -14,7 +14,9 @@ const TransactionTable = ({ transactions, dispatch, isFetching }) => {
       .then(transactions => dispatch(receiveTransactions(transactions)))
   }, [dispatch])
 
-  const transactionTableRows = transactions.map((transaction) => {
+  const filteredTransactions = filter ? transactions.filter(filter) : transactions
+
+  const transactionTableRows = filteredTransactions.map((transaction) => {
     return <TransactionTableRow
       id={transaction.id}
       acquirer_name={transaction.acquirer_name}
@@ -29,7 +31,7 @@ const TransactionTable = ({ transactions, dispatch, isFetching }) => {
   return (
     <Container className="transaction-table">
       <Row>
-        <Col xs={12} sm={12} md={11} lg={11} xl={11}>
+        <Col xs={12} sm={12} md={12} lg={12} xl={12}>
 
           <Table striped bordered hover>
 
@@ -37,7 +39,8 @@ const TransactionTable = ({ transactions, dispatch, isFetching }) => {
               <tr>
                 <th>Acquirer Name</th>
                 <th>Target Name</th>
-                <th>Value (£)</th>
+                <th align="right">Value (£)</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

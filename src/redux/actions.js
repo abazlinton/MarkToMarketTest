@@ -15,6 +15,9 @@ export const REQUEST_PROJECT = 'REQUEST_PROJECT'
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const ADDED_PROJECT = 'ADDED_PROJECT'
+// TODO: add request for add transaction to project
+export const ADD_TRANSACTION_TO_PROJECT = 'ADD_TRANSACTION_TO_PROJECT'
+
 
 export const requestCompanies = () => ({
   type: REQUEST_COMPANIES
@@ -94,5 +97,11 @@ export const addProject = (project) => ({
 
 export const addedProject = () => ({
   type: ADDED_PROJECT
+})
+
+export const addTransactionToProject = (transactionId, projectId) => ({
+  type: ADD_TRANSACTION_TO_PROJECT,
+  transactionId,
+  projectId
 })
 

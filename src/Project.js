@@ -46,9 +46,12 @@ const Project = ({ dispatch, id, project, isFetching }) => {
           <Card.Text>{project.description}</Card.Text>
         </Card.Body>
       </Card>
+      <TransactionTable 
+        filter={transaction => project.transactions.includes(transaction.id)}
+      />
       <h4 className="mb-5">Transactions in project</h4>
       {transactionPrompt}
-      <TransactionTable />
+      <TransactionTable />      
     </Container>
   )
 }
