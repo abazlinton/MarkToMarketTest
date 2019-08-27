@@ -58,6 +58,8 @@ https://m2m-app.abazlinton.now.sh
 
 - Though the `TransactionTable` is used in two places there might be some opportunity to make a more generic Table component that could be reused for companies / projects too?
 
+- `reducers.js` is doing too much, needs split into multiple reducers
+
 ### Additions
 
 - Currently missing is the ability to remove transactions from a project as per the brief.
