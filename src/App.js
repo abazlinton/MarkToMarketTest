@@ -46,7 +46,7 @@ const App = function() {
             return <Company id={match.params.id} />
           }}
         />
-        <Route exxact path="/projects/new" component={NewProject} />
+        <Route exact path="/projects/new" component={NewProject} />
         <Route 
           exact path="/projects" 
           render={({history}) => {
