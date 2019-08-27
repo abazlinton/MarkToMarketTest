@@ -50,6 +50,8 @@ https://m2m-app.abazlinton.now.sh
 
 ### Refactoring
 
+Some ideas, sure there's a lot more -
+
 - The Company Component should be broken down into more components
 
 - Some lower components - e.g. `TransactionTableRow` are doing to much. They should feed up clicks etc to higher components
@@ -58,7 +60,7 @@ https://m2m-app.abazlinton.now.sh
 
 - Though the `TransactionTable` is used in two places there might be some opportunity to make a more generic Table component that could be reused for companies / projects too?
 
-- `reducers.js` is doing too much, needs split into multiple reducers
+- `reducers.js` is doing too much, needs split into multiple reducers / same for actions
 
 ### Additions
 
