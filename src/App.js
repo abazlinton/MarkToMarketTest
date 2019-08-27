@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
-import CompanyTable from './components/CompanyComponents/CompanyTable';
-import Company from './components/CompanyComponents/Company';
+import React from 'react'
+import './App.css'
+import CompanyTable from './components/CompanyComponents/CompanyTable'
+import Company from './components/CompanyComponents/Company'
 import { Navbar, Nav } from 'react-bootstrap'
-import { Route, Switch } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+import { Route, Switch } from "react-router-dom"
+import { LinkContainer } from "react-router-bootstrap"
 import NewProject from './components/ProjectComponents/NewProject'
-import Projects from './components/ProjectComponents/Projects';
-import Project from './components/ProjectComponents/Project';
+import Projects from './components/ProjectComponents/Projects'
+import Project from './components/ProjectComponents/Project'
+import Home from './components/Home'
 
 
 const App = function() {
@@ -19,7 +20,7 @@ const App = function() {
           activeKey="index"
         >
           <LinkContainer to="/" exact={true}>
-            <Navbar.Brand className="brand text-white px-3">M2M</Navbar.Brand>
+            <Navbar.Brand className="brand text-white px-3">MTM</Navbar.Brand>
           </LinkContainer>
           <Nav.Item>
             <LinkContainer to="/companies" exact={true} eventKey="companies-index">
@@ -39,6 +40,7 @@ const App = function() {
         </Nav>
       </Navbar>
       <Switch>
+      <Route exact path="/" component={Home} />
         <Route exact path="/companies" component={CompanyTable} />
         <Route
           path="/companies/:id"
@@ -64,7 +66,7 @@ const App = function() {
         />
       </Switch>
     </div>
-  );
+  )
 }
 
 

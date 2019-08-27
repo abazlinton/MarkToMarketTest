@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import CompanyTableRow from './CompanyTableRow'
 import './CompanyTable.css'
-import { Row, Col, Container, Table } from 'react-bootstrap';
+import { Row, Col, Container, Table } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { requestCompanies, receiveCompanies } from '../../redux/actions'
 
