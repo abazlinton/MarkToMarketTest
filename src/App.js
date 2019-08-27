@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import CompanyTable from './CompanyTable';
-import Company from './Company';
+import CompanyTable from './components/CompanyComponents/CompanyTable';
+import Company from './components/CompanyComponents/Company';
 import { Navbar, Nav } from 'react-bootstrap'
 import { Route, Switch } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import NewProject from './NewProject'
-import Projects from './Projects';
-import Project from './Project';
+import NewProject from './components/ProjectComponents/NewProject'
+import Projects from './components/ProjectComponents/Projects';
+import Project from './components/ProjectComponents/Project';
 
 
 const App = function() {

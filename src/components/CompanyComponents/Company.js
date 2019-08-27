@@ -8,7 +8,7 @@ import {
   receiveCompanyAcquistions,
   requestCompanyTargets,
   receiveCompanyTargets
-} from './redux/actions'
+} from '../../redux/actions'
 import { connect } from 'react-redux'
 import numeral from 'numeral'
 

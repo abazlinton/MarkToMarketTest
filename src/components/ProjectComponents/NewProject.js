@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Form, Button, Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { addProject, addedProject } from './redux/actions'
+import { addProject, addedProject } from '../../redux/actions'
 import './NewProject.css'
 
 const NewProject = ({ lastAddedProjectId, dispatch, shouldRedirect }) => {

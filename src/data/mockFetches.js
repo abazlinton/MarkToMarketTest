@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock'
 import transactionsHelper from './transactionsHelper'
-import transactions from './data/transactions.json'
-import { addTransactionToProject } from './redux/actions'
+import transactions from './transactions.json'
+import { addTransactionToProject } from '../redux/actions'
 
 function mockFetches(store) {
   fetchMock

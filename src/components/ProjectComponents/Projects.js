@@ -2,7 +2,7 @@ import './Projects.css'
 import React, { useEffect, useState } from "react"
 import { connect } from 'react-redux'
 import { Container, Table, Col, Row } from 'react-bootstrap'
-import { receiveProjects, requestProjects } from './redux/actions'
+import { receiveProjects, requestProjects } from '../../redux/actions'
 import ProjectTableRow from "./ProjectTableRow"
 
 const Projects = ({ projects, dispatch, history }) => {

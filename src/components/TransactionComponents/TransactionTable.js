@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import './CompanyTable.css'
 import { Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { requestTransactions, receiveTransactions } from './redux/actions'
+import { requestTransactions, receiveTransactions } from '../../redux/actions'
 import TransactionTableRow from './TransactionTableRow';
 
 const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButtons }) => {

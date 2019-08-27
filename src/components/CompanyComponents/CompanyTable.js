@@ -3,7 +3,7 @@ import CompanyTableRow from './CompanyTableRow'
 import './CompanyTable.css'
 import { Row, Col, Container, Table } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { requestCompanies, receiveCompanies } from './redux/actions'
+import { requestCompanies, receiveCompanies } from '../../redux/actions'
 
 const CompanyTable = ({ companies, dispatch, isFetching }) => {
 

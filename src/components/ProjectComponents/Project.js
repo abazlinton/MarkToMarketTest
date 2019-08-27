@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import TransactionTable from "./TransactionTable"
-import { requestProject } from "./redux/actions"
+import TransactionTable from "../TransactionComponents/TransactionTable"
+import { requestProject } from "../../redux/actions"
 import { connect } from "react-redux"
 import { Container, Card, Alert } from "react-bootstrap"
 import "./Project.css"
