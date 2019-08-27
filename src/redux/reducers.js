@@ -39,7 +39,7 @@ const defaultState = {
   project: {},
   lastAddedProjectId: 1,
   shouldRedirect: false,
-  projectNotFound: false
+  projectFound: true
 }
 
 export default function m2m(state = defaultState, action) {
@@ -108,7 +108,7 @@ export default function m2m(state = defaultState, action) {
     }
 
     case PROJECT_NOT_FOUND: {
-      return { ...state, projectNotFound: true, isFetching: false }
+      return { ...state, projectFound: false, isFetching: false }
     }
 
     case REQUEST_PROJECT: {
@@ -116,7 +116,7 @@ export default function m2m(state = defaultState, action) {
     }
 
     case RECEIVE_PROJECT: {
-      return { ...state, project: action.project, isFetching: false }
+      return { ...state, project: action.project, isFetching: false, projectFound: true }
     }
 
     case REQUEST_PROJECTS: {

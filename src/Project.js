@@ -5,14 +5,14 @@ import { connect } from "react-redux"
 import { Container, Card, Alert } from "react-bootstrap"
 import "./Project.css"
 
-const Project = ({ requestProject, id, project, isFetching, projectNotFound }) => {
+const Project = ({ requestProject, id, project, isFetching, projectFound }) => {
   const [showAddTransactionPrompt, setShowAddTransactionPrompt] = useState(true)
 
   useEffect(() => {
     requestProject(id)
   }, [id, requestProject])
 
-  if (projectNotFound) return (
+  if (!projectFound) return (
     <Container className="project">
       <h1>Not Found</h1>
     </Container>
@@ -35,8 +35,8 @@ const Project = ({ requestProject, id, project, isFetching, projectNotFound }) =
     <Container className="project">
       <Card style={{ width: "80vw", marginBottom: "3rem" }}>
         <Card.Body>
-          <Card.Title as="h2">{project.name || ""}</Card.Title>
-          <Card.Text>{project.description}</Card.Text>
+          <Card.Title as="h2">{project.name}</Card.Title>
+          <Card.Text>{project.description || ""}</Card.Text>
         </Card.Body>
       </Card>
       <h4 className="mb-5">Transactions in project</h4>
@@ -59,7 +59,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   project: state.project,
   isFetching: state.isFetching,
-  projectNotFound: state.projectNotFound
+  projectFound: state.projectFound
 })
 
 export default connect(
