@@ -33,7 +33,7 @@ const defaultState = {
       id: 1,
       name: "Test Project",
       description: "Description for test project",
-      transactions: []
+      transactions: [1, 2]
     }
   ],
   project: {},
