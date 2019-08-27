@@ -1,8 +1,6 @@
 # Retrospective 
 
-# STOP
-
-## MTM
+## STOP - MTM
 
 ### I think the dataset is poor. 
 
@@ -21,7 +19,45 @@
 
 - I've seen plenty of codetests even for more senior roles which were far simpler, and even just plain JS for front-end roles.
 
-### (Alex) 
+## STOP - Alex
+
+### I let the test take over my holiday time
+
+ - I'm not entirely comfortable with the amount of work I put into this. It took over my week's holiday which was actually TOIL due to working too many hours at CodeClan. So it didn't really serve its purpose as a break.
+
+## START - Alex
+
+### Testing
+
+- I'm disappointed at small number of tests. But because a lot was unfamiliar to me I didn't want to take on this as well. There are some tests `transactionsHelper.test.js`, but nothing for reducers or the components. (I haven't done a lot of front-end testing so this would be new to me too)
+
+### Refactoring
+
+- The Company Component should be broken down into more components
+
+- Some lower components - e.g. `TransactionTableRow` are doing to much. They should feed up clicks etc to higher components
+
+- Move all fetches into the actions. Currently `Project` shows the way I would go. Because `Redux thunk` was to me this I felt it was too much to start with.
+
+- Though the `TransactionTable` is used in two places there might be some opportunity to make a more generic Table component that could be reused for companies / projects too?
+
+### Additions
+
+- Currently missing is the ability to remove transactions from a project as per the brief.
+
+- Error handling. Currently only `Project` and the action `requestProject` are doing anything much here (404)
+
+- On a few pages it would be nice to have links to other resources. On the Projects INDEX page for example there aren't links to the Company SHOW pages.
+
+
+## CONTINUE - Alex
+
+### Continue to learn
+
+- Before this task I'd used `Redux` only once in a small project. Without any async actions. I'd never used `Bootstrap`. I'd not used `mock-fetch`. I'd not used `Router` in a project, only taught a simple lesson on it. I also had to figure out how to make `Bootstrap` and `Router` play nicely with Links. I'd used `React Hooks` a little but it was good to consolidate that. Note: there's not one Class Component. Everything is functional. Which seems to be the direction of travel if you read between the lines of what Facebook is saying.
+
+
+
 
 
 
