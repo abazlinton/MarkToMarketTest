@@ -77,11 +77,13 @@ export const requestProject = (id) => {
 
     fetch(`http://api/projects/${id}`)
       .then(res => {
-        if (res.status === 404) throw new Error()
+        if (res.status === 404) throw new Error("404")
         return res.json()
       })
       .then(project => dispatch(receiveProject(project)))
-      .catch(error => dispatch(projectNotFound()))
+      .catch(error => {
+        if (error.message === "404") dispatch(projectNotFound())
+      })
 
     return {
       type: REQUEST_PROJECT
