@@ -1,1 +1,10 @@
-.company-table { padding-top: 70px; }
+
+.company-table { 
+  padding-top: 70px; 
+}
+
+@media (max-width: 576px) {
+  .company-table { 
+    padding-top: 200px; 
+  }
+}

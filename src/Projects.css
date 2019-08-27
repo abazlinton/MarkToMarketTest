@@ -1,3 +1,10 @@
+
 .projects-table { 
   padding-top: 70px; 
+}
+
+@media (max-width: 576px) {
+  .projects-table { 
+    padding-top: 200px; 
+  }
 }

@@ -1,1 +1,9 @@
-.company { padding-top: 70px; }
+.company { 
+  padding-top: 70px; 
+}
+
+@media (max-width: 576px) {
+  .company { 
+    padding-top: 200px; 
+  }
+}

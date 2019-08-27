@@ -1,3 +1,9 @@
 .new-project { 
   padding-top: 70px; 
 }
+
+@media (max-width: 576px) {
+  .new-project { 
+    padding-top: 200px; 
+  }
+}
