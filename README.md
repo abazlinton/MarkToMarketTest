@@ -1,3 +1,14 @@
+# Running the app
+
+Assumes recent  versions of node (8+ ?) / npm
+
+- clone the project
+- `npm i`
+- `npm start`
+
+Run tests `npm test`
+
+
 # Retrospective 
 
 ## STOP - MTM
@@ -30,6 +41,8 @@
 ### Testing
 
 - I'm disappointed at small number of tests. But because a lot was unfamiliar to me I didn't want to take on this as well. There are some tests `transactionsHelper.test.js`, but nothing for reducers or the components. (I haven't done a lot of front-end testing so this would be new to me too)
+
+ - I've used `mock-fetch` to supply the dataset. But it's not really what it's for - it's really for use in tests. But it does mean the app can call `fetch` and things work.
 
 ### Refactoring
 
