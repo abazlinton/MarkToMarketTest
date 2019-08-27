@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react"
 import TransactionTable from "./TransactionTable"
-import { requestProject, receiveProject } from "./redux/actions"
+import { requestProject } from "./redux/actions"
 import { connect } from "react-redux"
 import { Container, Card, Alert } from "react-bootstrap"
 import "./Project.css"
 
-const Project = ({ dispatch, id, project, isFetching }) => {
-  const [error, setError] = useState(null)
+const Project = ({ requestProject, id, project, isFetching, projectNotFound }) => {
   const [showAddTransactionPrompt, setShowAddTransactionPrompt] = useState(true)
 
   useEffect(() => {
-    dispatch(requestProject())
-    fetch(`http://api/projects/${id}`)
-      .then(res => {
-        if (res.status === 404) throw new Error("404")
-        return res.json()
-      })
-      .then(project => dispatch(receiveProject(project)))
-      .catch(error => setError(Number(error.message)))
-  }, [dispatch, id])
+    requestProject(id)
+  }, [id, requestProject])
 
-  if (error === 404)
-    return (
-      <Container className="project">
-        <h1>Not Found</h1>
-      </Container>
+  if (projectNotFound) return (
+    <Container className="project">
+      <h1>Not Found</h1>
+    </Container>
     )
-  if (!project.name) return null
+
+
+   if (!project.name) return null
 
   const transactionPrompt = showAddTransactionPrompt ? (
     <Alert
@@ -59,9 +52,17 @@ const Project = ({ dispatch, id, project, isFetching }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  project: state.project,
-  isFetching: state.isFetching
+const mapDispatchToProps = dispatch => ({
+  requestProject: (id) => dispatch(requestProject(id))
 })
 
-export default connect(mapStateToProps)(Project)
+const mapStateToProps = state => ({
+  project: state.project,
+  isFetching: state.isFetching,
+  projectNotFound: state.projectNotFound
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(Project)

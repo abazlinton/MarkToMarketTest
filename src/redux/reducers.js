@@ -16,7 +16,8 @@ import {
   ADDED_PROJECT,
   REQUEST_PROJECTS,
   RECEIVE_PROJECTS,
-  ADD_TRANSACTION_TO_PROJECT
+  ADD_TRANSACTION_TO_PROJECT,
+  PROJECT_NOT_FOUND
 } from "./actions"
 
 const defaultState = {
@@ -37,7 +38,8 @@ const defaultState = {
   ],
   project: {},
   lastAddedProjectId: 1,
-  shouldRedirect: false
+  shouldRedirect: false,
+  projectNotFound: false
 }
 
 export default function m2m(state = defaultState, action) {
@@ -105,6 +107,10 @@ export default function m2m(state = defaultState, action) {
       return { ...state, shouldRedirect: false }
     }
 
+    case PROJECT_NOT_FOUND: {
+      return { ...state, projectNotFound: true, isFetching: false }
+    }
+
     case REQUEST_PROJECT: {
       return { ...state, isFetching: true }
     }
@@ -122,8 +128,6 @@ export default function m2m(state = defaultState, action) {
     }
 
     case ADD_TRANSACTION_TO_PROJECT: { 
-      debugger
-
       const foundProject = state.projects.find(project => Number(project.id) === Number(action.projectId))
       const foundProjectIndex = state.projects.findIndex(project => Number(project.id) === Number(action.projectId))
       const cloneOfProject = { ...foundProject }

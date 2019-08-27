@@ -17,6 +17,7 @@ export const ADD_PROJECT = 'ADD_PROJECT'
 export const ADDED_PROJECT = 'ADDED_PROJECT'
 // TODO: add request for add transaction to project
 export const ADD_TRANSACTION_TO_PROJECT = 'ADD_TRANSACTION_TO_PROJECT'
+export const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND'
 
 
 export const requestCompanies = () => ({
@@ -71,9 +72,25 @@ export const receiveTransactions = (transactions) => ({
   transactions
 })
 
-export const requestProject = (id) => ({
-  type: REQUEST_PROJECT,
-  id
+export const requestProject = (id) => {
+  return (dispatch) => {
+
+    fetch(`http://api/projects/${id}`)
+      .then(res => {
+        if (res.status === 404) throw new Error()
+        return res.json()
+      })
+      .then(project => dispatch(receiveProject(project)))
+      .catch(error => dispatch(projectNotFound()))
+
+    return {
+      type: REQUEST_PROJECT
+    }
+  }
+}
+
+export const projectNotFound = () => ({
+  type: PROJECT_NOT_FOUND
 })
 
 export const receiveProject = (project) => ({

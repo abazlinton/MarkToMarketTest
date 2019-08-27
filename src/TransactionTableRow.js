@@ -17,7 +17,7 @@ const TransactionTableRow = ({ acquirer_name, target_name, value, id, projectId,
         body: {transaction_id: transactionIdToAddToProject}
       })
     }
-  },[transactionIdToAddToProject])
+  },[transactionIdToAddToProject, projectId])
 
 
   function onFormSubmit(event){
