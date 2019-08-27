@@ -40,12 +40,14 @@ const Project = ({ requestProject, id, project, isFetching, projectFound }) => {
         </Card.Body>
       </Card>
       <h4 className="mb-5">Transactions in project</h4>
-      <TransactionTable 
+      <TransactionTable
+        hasButtons={false}
         filter={transaction => project.transactions.includes(transaction.id)}
       />
       <h4 className="mb-5">Other Transactions</h4>
       {transactionPrompt}
       <TransactionTable 
+        hasButtons={true}
         filter={transaction => !project.transactions.includes(transaction.id)}
       />      
     </Container>

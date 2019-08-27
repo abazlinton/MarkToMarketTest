@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { requestTransactions, receiveTransactions } from './redux/actions'
 import TransactionTableRow from './TransactionTableRow';
 
-const TransactionTable = ({ transactions, dispatch, isFetching, filter }) => {
+const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButtons }) => {
 
   useEffect(() => {
     dispatch(requestTransactions())
@@ -23,6 +23,7 @@ const TransactionTable = ({ transactions, dispatch, isFetching, filter }) => {
       target_name={transaction.target_name}
       value={transaction.value}
       key={transaction.id}
+      hasButtons={hasButtons}
     />
   })
 
@@ -40,7 +41,7 @@ const TransactionTable = ({ transactions, dispatch, isFetching, filter }) => {
                 <th>Acquirer Name</th>
                 <th>Target Name</th>
                 <th align="right">Value (£)</th>
-                <th></th>
+                {hasButtons ? <th></th> : null}
               </tr>
             </thead>
             <tbody>
