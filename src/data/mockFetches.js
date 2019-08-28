@@ -28,7 +28,7 @@ function mockFetches(store) {
     )
     .get('http://api/projects', encloseStoreProjects(store))
     .get('express:/projects/:id', encloseStoreProject(store))
-    .post('express:/projects/:id/transactions', encloseStorePostProject(store))
+    .post('express:/projects/:id/transactions', 200)
 }
 
 // Yuck

@@ -1,17 +1,8 @@
 import React, { useEffect } from 'react'
 import { Row, Col, Container, Table } from 'react-bootstrap';
-import { connect } from 'react-redux'
-import { requestTransactions, receiveTransactions } from '../../redux/actions'
 import TransactionTableRow from './TransactionTableRow';
 
-const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButtons }) => {
-
-  useEffect(() => {
-    dispatch(requestTransactions())
-    fetch('http://api/transactions')
-      .then(res => res.json())
-      .then(transactions => dispatch(receiveTransactions(transactions)))
-  }, [dispatch])
+const TransactionTable = ({ transactions, isFetching, filter, submitId, buttonText, buttonVariant, idSelected }) => {
 
   const filteredTransactions = filter ? transactions.filter(filter) : transactions
 
@@ -22,7 +13,10 @@ const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButto
       target_name={transaction.target_name}
       value={transaction.value}
       key={transaction.id}
-      hasButtons={hasButtons}
+      submitId={submitId}
+      buttonText={buttonText}
+      buttonVariant={buttonVariant}
+      idSelected={idSelected}
     />
   })
 
@@ -34,13 +28,12 @@ const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButto
         <Col xs={12} sm={12} md={12} lg={12} xl={12}>
 
           <Table striped bordered hover>
-
             <thead>
               <tr>
                 <th>Acquirer Name</th>
                 <th>Target Name</th>
                 <th align="right">Value (£)</th>
-                {hasButtons ? <th></th> : null}
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -53,11 +46,4 @@ const TransactionTable = ({ transactions, dispatch, isFetching, filter, hasButto
   )
 }
 
-const mapStateToProps = state => ({
-  transactions: state.transactions,
-  isFetching: state.isFetching
-})
-
-export default connect(
-  mapStateToProps
-)(TransactionTable)
+export default TransactionTable

@@ -1,23 +1,47 @@
 import React, { useEffect, useState } from "react"
 import TransactionTable from "../TransactionComponents/TransactionTable"
-import { requestProject } from "../../redux/actions"
+import { requestProject, requestTransactions, addTransactionToProject } from "../../redux/actions"
 import { connect } from "react-redux"
 import { Container, Card, Alert } from "react-bootstrap"
 import "./Project.css"
 
-const Project = ({ requestProject, id, project, isFetching, projectFound }) => {
+const Project = ({ requestProject, requestTransactions, addTransactionToProject, id, project, transactions, projectFound }) => {
+  
+
   const [showAddTransactionPrompt, setShowAddTransactionPrompt] = useState(true)
+  const [transactionIdToAdd, setTransactionIdToAdd] = useState(0)
+  const [transactionIdToRemove, settransactionIdToRemove] = useState(0)
 
   useEffect(() => {
     requestProject(id)
-  }, [id, requestProject])
+    requestTransactions()
+  }, [id])
+
+  useEffect(() => {
+    if (transactionIdToAdd){
+      addTransactionToProject(transactionIdToAdd, id)
+    }
+  }, [transactionIdToAdd])
+
+  useEffect(() => {
+    if (transactionIdToRemove){
+      removeTransactionFromProject(transactionIdToAdd, id)
+    }
+  }, [transactionIdToRemove])
+
+  function onSubmitTransactionIdToAdd(id){
+    setTransactionIdToAdd(id)
+  }
+
+  function onSubmitTransactionIdToRemove(id){
+    setTransactionIdToRemove(id)
+  }
 
   if (!projectFound) return (
     <Container className="project">
       <h1>Not Found</h1>
     </Container>
     )
-
 
    if (!project.name) return null
 
@@ -41,27 +65,36 @@ const Project = ({ requestProject, id, project, isFetching, projectFound }) => {
       </Card>
       <h4 className="mb-5">Transactions in project</h4>
       <TransactionTable
-        hasButtons={false}
+        transactions={transactions}
         filter={transaction => project.transactions.includes(transaction.id)}
+        buttonText="Remove"
+        buttonVariant="danger"
+        idSelected={onSubmitTransactionIdToRemove}
       />
       <h4 className="mb-5">Other Transactions</h4>
       {transactionPrompt}
       <TransactionTable 
-        hasButtons={true}
+        transactions={transactions}
         filter={transaction => !project.transactions.includes(transaction.id)}
+        buttonText="Add"
+        buttonVariant="primary"
+        idSelected={onSubmitTransactionIdToAdd}
       />      
     </Container>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  requestProject: (id) => dispatch(requestProject(id))
+  requestProject: (id) => dispatch(requestProject(id)),
+  requestTransactions: () => dispatch(requestTransactions()),
+  addTransactionToProject: (transactionIdToAdd, id) => dispatch(addTransactionToProject(transactionIdToAdd, id))
 })
 
 const mapStateToProps = state => ({
   project: state.project,
   isFetching: state.isFetching,
-  projectFound: state.projectFound
+  projectFound: state.projectFound,
+  transactions: state.transactions
 })
 
 export default connect(
