@@ -54,8 +54,6 @@ Some ideas, sure there's a lot more -
 
 - The Company Component should be broken down into more components
 
-- Some lower components - e.g. `TransactionTableRow` are doing to much. They should feed up clicks etc to higher components
-
 - Move all fetches into the actions. Currently `Project` shows the way I would go. Because `Redux thunk` was to me this I felt it was too much to start with.
 
 - Though the `TransactionTable` is used in two places there might be some opportunity to make a more generic Table component that could be reused for companies / projects too?
@@ -63,8 +61,6 @@ Some ideas, sure there's a lot more -
 - `reducers.js` is doing too much, needs split into multiple reducers / same for actions
 
 ### Additions
-
-- Currently missing is the ability to remove transactions from a project as per the brief.
 
 - Error handling. Currently only `Project` and the action `requestProject` are doing anything much here (404)
 
