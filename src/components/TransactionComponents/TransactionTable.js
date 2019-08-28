@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Row, Col, Container, Table } from 'react-bootstrap';
 import TransactionTableRow from './TransactionTableRow';
 

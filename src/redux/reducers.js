@@ -17,7 +17,8 @@ import {
   REQUEST_PROJECTS,
   RECEIVE_PROJECTS,
   ADD_TRANSACTION_TO_PROJECT,
-  PROJECT_NOT_FOUND
+  PROJECT_NOT_FOUND,
+  REMOVE_TRANSACTION_FROM_PROJECT
 } from "./actions"
 
 const defaultState = {
@@ -139,6 +140,22 @@ export default function m2m(state = defaultState, action) {
         nextProject,  
         ...state.projects.slice(foundProjectIndex + 1, state.projects.length)
       ]
+      return {...state, project: nextProject, projects: nextProjects}
+    }
+
+    case REMOVE_TRANSACTION_FROM_PROJECT: {
+      const foundProject = state.projects.find(project => Number(project.id) === Number(action.projectId))
+      const foundProjectIndex = state.projects.findIndex(project => Number(project.id) === Number(action.projectId))
+      const cloneOfProject = { ...foundProject }
+      const cloneOfProjectTransactions = [...cloneOfProject.transactions]
+      const nextProjectTransactions = cloneOfProjectTransactions.filter(transaction => Number(transaction) !== Number(action.transactionId))
+      const nextProject = {...cloneOfProject, transactions: nextProjectTransactions}
+      const nextProjects = [
+        ...state.projects.slice(0, foundProjectIndex), 
+        nextProject,  
+        ...state.projects.slice(foundProjectIndex + 1, state.projects.length)
+      ]
+      debugger
       return {...state, project: nextProject, projects: nextProjects}
     }
 

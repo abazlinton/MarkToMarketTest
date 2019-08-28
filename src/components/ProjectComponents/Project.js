@@ -1,49 +1,63 @@
 import React, { useEffect, useState } from "react"
 import TransactionTable from "../TransactionComponents/TransactionTable"
-import { requestProject, requestTransactions, addTransactionToProject } from "../../redux/actions"
+import {
+  requestProject,
+  requestTransactions,
+  addTransactionToProject,
+  removeTransactionFromProject
+} from "../../redux/actions"
 import { connect } from "react-redux"
 import { Container, Card, Alert } from "react-bootstrap"
 import "./Project.css"
 
-const Project = ({ requestProject, requestTransactions, addTransactionToProject, id, project, transactions, projectFound }) => {
-  
+const Project = ({
+  requestProject,
+  requestTransactions,
+  addTransactionToProject,
+  removeTransactionFromProject,
+  id,
+  project,
+  transactions,
+  projectFound
+}) => {
 
   const [showAddTransactionPrompt, setShowAddTransactionPrompt] = useState(true)
   const [transactionIdToAdd, setTransactionIdToAdd] = useState(0)
-  const [transactionIdToRemove, settransactionIdToRemove] = useState(0)
+  const [transactionIdToRemove, setTransactionIdToRemove] = useState(0)
 
   useEffect(() => {
     requestProject(id)
     requestTransactions()
-  }, [id])
+  }, [id, requestProject, requestTransactions])
 
   useEffect(() => {
-    if (transactionIdToAdd){
+    if (transactionIdToAdd) {
       addTransactionToProject(transactionIdToAdd, id)
     }
-  }, [transactionIdToAdd])
+  }, [transactionIdToAdd, id, addTransactionToProject])
 
   useEffect(() => {
-    if (transactionIdToRemove){
-      removeTransactionFromProject(transactionIdToAdd, id)
+    if (transactionIdToRemove) {
+      removeTransactionFromProject(transactionIdToRemove, id)
     }
-  }, [transactionIdToRemove])
+  }, [removeTransactionFromProject, transactionIdToRemove, id])
 
-  function onSubmitTransactionIdToAdd(id){
+  function onSubmitTransactionIdToAdd(id) {
     setTransactionIdToAdd(id)
   }
 
-  function onSubmitTransactionIdToRemove(id){
+  function onSubmitTransactionIdToRemove(id) {
     setTransactionIdToRemove(id)
   }
 
-  if (!projectFound) return (
-    <Container className="project">
-      <h1>Not Found</h1>
-    </Container>
+  if (!projectFound)
+    return (
+      <Container className="project">
+        <h1>Not Found</h1>
+      </Container>
     )
 
-   if (!project.name) return null
+  if (!project.name) return null
 
   const transactionPrompt = showAddTransactionPrompt ? (
     <Alert
@@ -73,21 +87,24 @@ const Project = ({ requestProject, requestTransactions, addTransactionToProject,
       />
       <h4 className="mb-5">Other Transactions</h4>
       {transactionPrompt}
-      <TransactionTable 
+      <TransactionTable
         transactions={transactions}
         filter={transaction => !project.transactions.includes(transaction.id)}
         buttonText="Add"
         buttonVariant="primary"
         idSelected={onSubmitTransactionIdToAdd}
-      />      
+      />
     </Container>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  requestProject: (id) => dispatch(requestProject(id)),
+  requestProject: id => dispatch(requestProject(id)),
   requestTransactions: () => dispatch(requestTransactions()),
-  addTransactionToProject: (transactionIdToAdd, id) => dispatch(addTransactionToProject(transactionIdToAdd, id))
+  addTransactionToProject: (transactionIdToAdd, id) =>
+    dispatch(addTransactionToProject(transactionIdToAdd, id)),
+  removeTransactionFromProject: (transactionIdToRemove, id) =>
+    dispatch(removeTransactionFromProject(transactionIdToRemove, id))
 })
 
 const mapStateToProps = state => ({
@@ -100,4 +117,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-  )(Project)
+)(Project)

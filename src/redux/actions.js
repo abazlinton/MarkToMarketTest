@@ -17,6 +17,7 @@ export const ADD_PROJECT = "ADD_PROJECT"
 export const ADDED_PROJECT = "ADDED_PROJECT"
 // TODO: add request for add transaction to project
 export const ADD_TRANSACTION_TO_PROJECT = "ADD_TRANSACTION_TO_PROJECT"
+export const REMOVE_TRANSACTION_FROM_PROJECT = "REMOVE_TRANSACTION_FROM_PROJECT"
 export const PROJECT_NOT_FOUND = "PROJECT_NOT_FOUND"
 
 export const requestCompanies = () => ({
@@ -134,6 +135,18 @@ export const addTransactionToProject = (transactionId, projectId) => {
 
   return {
     type: ADD_TRANSACTION_TO_PROJECT,
+    transactionId,
+    projectId
+  }
+}
+
+export const removeTransactionFromProject = (transactionId, projectId) => {
+  fetch(`http://api/projects/${projectId}/transactions/${transactionId}`, {
+    method: "DELETE"
+  })
+
+  return {
+    type: REMOVE_TRANSACTION_FROM_PROJECT,
     transactionId,
     projectId
   }

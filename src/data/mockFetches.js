@@ -29,6 +29,7 @@ function mockFetches(store) {
     .get('http://api/projects', encloseStoreProjects(store))
     .get('express:/projects/:id', encloseStoreProject(store))
     .post('express:/projects/:id/transactions', 200)
+    .delete('express:/projects/:projectId/transactions/:transactionId', 200)
 }
 
 // Yuck
