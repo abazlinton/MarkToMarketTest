@@ -66,6 +66,7 @@ Some ideas, sure there's a lot more -
 
 - On a few pages it would be nice to have links to other resources. On the Projects INDEX page for example there aren't links to the Company SHOW pages.
 
+- Given the inherent relationship between companies sharing the same Company Number (`target_id`) it would be nice to show this on the Company page. With additional data it could show the change over time as per the Companies House website.
 
 ## CONTINUE - Alex
 
